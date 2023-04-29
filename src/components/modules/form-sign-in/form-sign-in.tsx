@@ -1,20 +1,20 @@
+import useAuthContext from "@/base/context/auth/hook";
 import Button from "@/components/elements/button/button";
 import Input from "@/components/elements/input/input";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function FormSignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
-  async function onSubmitHandler() {
-    await fetch("/api/auth/sign-in", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+  const { signInUser } = useAuthContext();
+
+  async function onSubmitHandler(e: FormEvent) {
+    e.preventDefault();
+    await signInUser(email, password);
+    await router.replace("/dashboard");
   }
 
   return (

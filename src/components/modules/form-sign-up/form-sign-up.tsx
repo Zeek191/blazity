@@ -1,21 +1,18 @@
+import useAuth from "@/base/hooks/useAuth";
 import Button from "@/components/elements/button/button";
 import Input from "@/components/elements/input/input";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function FormSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  async function onSubmitHandler() {
-    await fetch("/api/auth/sign-up", {
-      method: "POST",
-      body: JSON.stringify({
-        email,
-        password,
-        name,
-      }),
-    });
+  const { signUpHandler } = useAuth();
+
+  async function onSubmitHandler(e: FormEvent) {
+    e.preventDefault();
+    signUpHandler(email, password);
   }
 
   return (
