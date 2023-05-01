@@ -1,7 +1,10 @@
+import FullHeightContainer from "@/components/modules/full-height-container/full-height-container";
 import Hero from "@/components/sections/hero/hero";
 
 export default function About() {
-  <div>
-    <Hero title="About page" />
-  </div>;
+  return (
+    <FullHeightContainer>
+      <Hero title="About page" />
+    </FullHeightContainer>
+  );
 }

@@ -8,7 +8,7 @@ export default function UserBar() {
     <div className="flex items-center justify-center flex-col">
       <UserInitials {...info} />
 
-      <p className="mt-6">
+      <p className="mt-6 capitalize">
         Hello {info?.name} {info?.surname}!
       </p>
     </div>

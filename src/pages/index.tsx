@@ -1,12 +1,13 @@
+import FullHeightContainer from "@/components/modules/full-height-container/full-height-container";
 import Hero from "@/components/sections/hero/hero";
 
 export default function HomePage() {
   return (
-    <div>
+    <FullHeightContainer>
       <Hero
         title="Discover the world of programming"
         description="Create something that will change the future - with us it's possible!"
       />
-    </div>
+    </FullHeightContainer>
   );
 }
