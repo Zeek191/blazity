@@ -8,9 +8,10 @@ import {
 } from "firebase/auth";
 
 import { firebaseAuth } from "@/base/services/firebase";
+import { clearSigninAttempAction } from "./actions";
 
 export default function useAuthContext() {
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
 
   async function signUpUser(email: string, password: string) {
     try {
@@ -36,11 +37,17 @@ export default function useAuthContext() {
     }
   }
 
+  function clearSignInAttepm() {
+    return dispatch(clearSigninAttempAction());
+  }
+
   return {
     user: state.user,
     info: state.info,
+    attempted: state.attempted,
     signInUser,
     signOutUser,
     signUpUser,
+    clearSignInAttepm,
   };
 }

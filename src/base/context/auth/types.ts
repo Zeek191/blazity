@@ -4,10 +4,12 @@ import type { User } from "firebase/auth";
 export enum ACTION_TYPES {
   UPDATE_USER = "UPDATE_USER",
   CLEAR_USER = "CLEAR_USER",
+  CLEAR_ATTEMP = "CLEAR_ATTEMP",
 }
 
 export type State = {
   user: User | null;
+  attempted: boolean;
   info?: Omit<UserInfo, "email"> | null;
 };
 
@@ -18,4 +20,5 @@ export type PAYLOAD_UPDATE_USER = {
 
 export type ACTIONS =
   | { type: ACTION_TYPES.UPDATE_USER; payload: PAYLOAD_UPDATE_USER }
-  | { type: ACTION_TYPES.CLEAR_USER };
+  | { type: ACTION_TYPES.CLEAR_USER }
+  | { type: ACTION_TYPES.CLEAR_ATTEMP };

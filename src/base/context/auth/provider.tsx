@@ -17,6 +17,7 @@ import useUsersFirestore from "@/base/hooks/use-users-firestore";
 const initialState: State = {
   user: null,
   info: null,
+  attempted: false,
 };
 
 export const AuthContext = createContext<{
