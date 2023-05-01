@@ -1,6 +1,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import useAuthContext from "@/base/context/auth/hook";
+import styles from "./styles.module.css";
 
 export default function Header() {
   const { user, signOutUser } = useAuthContext();
@@ -15,7 +16,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="py-10">
+    <header className={clsx(styles.wrapper, "py-8 fixed w-full z-50")}>
       <ul className="flex justify-end">
         {globalLinks.map(({ label, href, fn, onlySignedIn, onlySignedOut }) => (
           <li
@@ -34,7 +35,6 @@ export default function Header() {
           </li>
         ))}
       </ul>
-      <div>User: {user}</div>
     </header>
   );
 }

@@ -1,18 +1,30 @@
-import useAuth from "@/base/hooks/useAuth";
+import useAuthContext from "@/base/context/auth/hook";
+import useUsersFirestore from "@/base/hooks/use-users-firestore";
 import Button from "@/components/elements/button/button";
 import Input from "@/components/elements/input/input";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 
 export default function FormSignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
 
-  const { signUpHandler } = useAuth();
+  const router = useRouter();
+  const { createUserRecord } = useUsersFirestore();
+
+  const { signUpUser } = useAuthContext();
 
   async function onSubmitHandler(e: FormEvent) {
-    e.preventDefault();
-    signUpHandler(email, password);
+    try {
+      e.preventDefault();
+      await signUpUser(email, password);
+      await createUserRecord({ email, name, surname });
+      await router.replace("/dashboard");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -28,11 +40,19 @@ export default function FormSignUp() {
         onChange={(e) => setName(e.target.value)}
       />
       <Input
+        id="surname"
+        label="Surname"
+        placeholder="Eg. Park"
+        value={surname}
+        onChange={(e) => setSurname(e.target.value)}
+      />
+      <Input
         id="email"
         label="E-mail"
         placeholder="Eg. xyz@gmail.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <Input
         id="password"
@@ -41,6 +61,7 @@ export default function FormSignUp() {
         placeholder="Eg. Zaq123WSX"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <Button type="submit" className="mt-10">
         Sign Up

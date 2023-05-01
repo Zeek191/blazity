@@ -1,8 +1,9 @@
-import { ACTION_TYPES } from "./types";
+import { User } from "firebase/auth";
+import { ACTION_TYPES, PAYLOAD_UPDATE_USER } from "./types";
 
-export function updateUserAction(payload: string): {
+export function updateUserAction(payload: PAYLOAD_UPDATE_USER): {
   type: ACTION_TYPES.UPDATE_USER;
-  payload: string;
+  payload: PAYLOAD_UPDATE_USER;
 } {
   return {
     type: ACTION_TYPES.UPDATE_USER,

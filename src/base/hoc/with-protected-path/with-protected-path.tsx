@@ -10,7 +10,7 @@ export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
     const router = useRouter();
 
     useEffect(() => {
-      if (!user) router.push("/auth/sign-in");
+      if (!user?.uid) router.push("/auth/sign-in");
     }, [user]);
 
     return <Component {...props} />;
