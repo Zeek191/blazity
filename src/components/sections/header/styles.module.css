@@ -1,0 +1,16 @@
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.wrapper {
+  animation-name: fadeDown;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}

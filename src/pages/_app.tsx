@@ -6,8 +6,10 @@ import AuthProvider from "@/base/context/auth/provider";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
-      <Header />
-      <Component {...pageProps} />
+      <div className="font-mono">
+        <Header />
+        <Component {...pageProps} />
+      </div>
     </AuthProvider>
   );
 }

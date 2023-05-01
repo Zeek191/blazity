@@ -5,17 +5,18 @@ import {
   useEffect,
   useReducer,
 } from "react";
-import { ACTIONS, State } from "./types";
+import { ACTIONS, PAYLOAD_UPDATE_USER, State } from "./types";
 import { firebaseAuth } from "@/base/services/firebase";
 
 import { User } from "firebase/auth";
 
 import AuthReducer from "./reducer";
 import { clearUserAction, updateUserAction } from "./actions";
+import useUsersFirestore from "@/base/hooks/use-users-firestore";
 
 const initialState: State = {
-  user: "",
-  authLoading: true,
+  user: null,
+  info: null,
 };
 
 export const AuthContext = createContext<{
@@ -28,10 +29,20 @@ export const AuthContext = createContext<{
 
 export default function AuthProvider({ children }: PropsWithChildren<{}>) {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+  const { readUserRecord } = useUsersFirestore();
 
-  function authStateChangeHandler(authState: User | null) {
-    if (!authState) return dispatch(clearUserAction());
-    return dispatch(updateUserAction(authState.uid));
+  async function authStateChangeHandler(authState: User | null) {
+    if (!authState || !authState.email) return dispatch(clearUserAction());
+    const userAdditionalInfo = await readUserRecord({
+      docKey: authState?.email,
+    });
+
+    return dispatch(
+      updateUserAction({
+        user: authState,
+        info: userAdditionalInfo.data() as PAYLOAD_UPDATE_USER["info"],
+      })
+    );
   }
 
   useEffect(() => {
