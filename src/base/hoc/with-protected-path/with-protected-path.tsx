@@ -6,13 +6,13 @@ export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>
 ) {
   return function (props: T) {
-    const { user, attempted, clearSignInAttepm } = useAuthContext();
+    const { user, attempted, clearSignInAttemp } = useAuthContext();
     const router = useRouter();
 
     useEffect(() => {
-      if (attempted && !user) {
+      if (!user) {
         router.push("/auth/sign-in");
-        clearSignInAttepm();
+        clearSignInAttemp();
       }
     }, [user, attempted]);
 
