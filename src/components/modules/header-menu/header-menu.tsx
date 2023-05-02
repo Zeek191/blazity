@@ -21,7 +21,8 @@ export default function HeaderMenu({ className }: HeaderMenuProps) {
         <li
           key={label}
           className={clsx(
-            "mb-5 text-black",
+            "mb-5 text-black md:text-white md:mb-0 md:mx-5 relative after:duration-200 after:left-0",
+            "after:w-0 after:hover:w-full after:h-[2px] after:bg-white after:bottom-0 after:absolute",
             onlySignedOut && user && "hidden",
             onlySignedIn && !user && "hidden"
           )}
