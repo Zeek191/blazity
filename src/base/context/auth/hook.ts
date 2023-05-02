@@ -37,7 +37,7 @@ export default function useAuthContext() {
     }
   }
 
-  function clearSignInAttepm() {
+  function clearSignInAttemp() {
     return dispatch(clearSigninAttempAction());
   }
 
@@ -48,6 +48,6 @@ export default function useAuthContext() {
     signInUser,
     signOutUser,
     signUpUser,
-    clearSignInAttepm,
+    clearSignInAttemp,
   };
 }
