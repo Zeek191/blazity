@@ -23,7 +23,7 @@ export default function Header() {
   }, [router.pathname, isTablet]);
 
   return (
-    <header className={clsx(styles.wrapper, "py-8 fixed w-full z-10")}>
+    <header className={clsx(styles.wrapper, "py-8 fixed w-full z-20")}>
       <HeaderMenu className="hidden md:flex justify-end" />
 
       <div className="w-full flex justify-end pr-8">
@@ -31,7 +31,7 @@ export default function Header() {
           state={mobileMenu}
           variant={mobileMenu ? "dark" : "light"}
           changeStateHandler={changeMobileMenuState}
-          className={clsx(mobileMenu && "z-20")}
+          className={clsx(mobileMenu && "z-30")}
         />
       </div>
 
