@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { ROUTES } from "@/base/consts/routes";
 import useAuthContext from "@/base/context/auth/hook";
 
 export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
@@ -11,7 +12,7 @@ export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
 
     useEffect(() => {
       if (!user) {
-        router.push("/auth/sign-in");
+        router.push(ROUTES.SIGN_IN);
         clearSignInAttemp();
       }
     }, [user, attempted]);

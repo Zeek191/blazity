@@ -1,3 +1,4 @@
+import { ROUTES } from "@/base/consts/routes";
 import useAuthContext from "@/base/context/auth/hook";
 import Button from "@/components/elements/button/button";
 import Input from "@/components/elements/input/input";
@@ -14,7 +15,7 @@ export default function FormSignIn() {
   async function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
     await signInUser(email, password);
-    await router.replace("/dashboard");
+    await router.replace(ROUTES.DASHBOARD);
   }
 
   return (

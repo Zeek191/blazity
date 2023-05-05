@@ -1,5 +1,7 @@
+import { ROUTES } from "@/base/consts/routes";
 import useAuthContext from "@/base/context/auth/hook";
 import useUsersFirestore from "@/base/hooks/use-users-firestore";
+import { createStripeUser } from "@/base/services/stripe/users";
 import Button from "@/components/elements/button/button";
 import Input from "@/components/elements/input/input";
 import { useRouter } from "next/router";
@@ -12,16 +14,16 @@ export default function FormSignUp() {
   const [surname, setSurname] = useState("");
 
   const router = useRouter();
-  const { createUserRecord } = useUsersFirestore();
-
   const { signUpUser } = useAuthContext();
+  const { createUserRecord } = useUsersFirestore();
 
   async function onSubmitHandler(e: FormEvent) {
     try {
       e.preventDefault();
       await signUpUser(email, password);
-      await createUserRecord({ email, name, surname });
-      await router.replace("/dashboard");
+      const stripeUser = await createStripeUser({ email, name, surname });
+      await createUserRecord({ email, name, surname, stripeId: stripeUser.id });
+      await router.replace(ROUTES.DASHBOARD);
     } catch (error) {
       console.error(error);
     }
