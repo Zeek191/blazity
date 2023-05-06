@@ -29,7 +29,7 @@ export default async function handler(
       });
 
       res.status(200).json(session);
-    } catch (err) {
+    } catch (err: any) {
       res.status(err.statusCode || 500).json({ error: err.message });
     }
   } else {
