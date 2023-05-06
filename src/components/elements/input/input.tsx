@@ -28,12 +28,20 @@ export default function Input(props: InputProps) {
 
   return (
     <div className={clsx("flex flex-col mb-4", className)}>
-      {label && <label htmlFor={rest.id}>{label}</label>}
+      {label && (
+        <label
+          htmlFor={rest.id}
+          className={clsx(props.disabled && "text-gray-500")}
+        >
+          {label}
+        </label>
+      )}
       <input
         {...rest}
         type={type === "password" ? "password" : "text"}
         className={clsx(
           "bg-black ring-gray-400 ring-1 text-white px-3 py-2 rounded-lg w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white",
+          props.disabled && "text-gray-500 cursor-not-allowed",
           className
         )}
       />

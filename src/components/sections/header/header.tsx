@@ -9,6 +9,7 @@ import { BREAKPOINTS } from "@/base/consts/media-breakpoints";
 
 export default function Header() {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const isTablet = useMediaQuery({ query: BREAKPOINTS.MD });
   const router = useRouter();
 
@@ -17,13 +18,32 @@ export default function Header() {
   }
 
   useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     if (mobileMenu) {
       changeMobileMenuState();
     }
   }, [router.pathname, isTablet]);
 
   return (
-    <header className={clsx(styles.wrapper, "py-8 fixed w-full z-20")}>
+    <header
+      className={clsx(
+        styles.wrapper,
+        "py-8 fixed w-full z-20 duration-200",
+        isScrolled && "bg-white duration-300 backdrop-blur-md bg-opacity-5"
+      )}
+    >
       <HeaderMenu className="hidden md:flex justify-end" />
 
       <div className="w-full flex justify-end pr-8">

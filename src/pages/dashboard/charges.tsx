@@ -3,14 +3,16 @@ import MenuHorizontal from "@/components/elements/menu-horizontal/menu-horizonta
 import FullHeightContainer from "@/components/modules/full-height-container/full-height-container";
 import withProtectedPath from "@/base/hoc/with-protected-path";
 import { DASHBOARD_MENUS } from "@/base/consts/dashboard-menus";
+import ChargesBoard from "@/components/sections/charges-board/charges-board";
 
-function Billings() {
+function Charges() {
   return (
-    <FullHeightContainer>
+    <FullHeightContainer className="justify-start pt-32">
       <UserBar />
       <MenuHorizontal links={DASHBOARD_MENUS} />
+      <ChargesBoard />
     </FullHeightContainer>
   );
 }
 
-export default withProtectedPath(Billings);
+export default withProtectedPath(Charges);
