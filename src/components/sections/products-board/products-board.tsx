@@ -7,6 +7,7 @@ import useAuthContext from "@/base/context/auth/hook";
 import { checkout } from "@/base/services/stripe/checkout";
 import { useRouter } from "next/router";
 import { ROUTES } from "@/base/consts/routes";
+import Spinner from "@/components/elements/spinner/spinner";
 
 export default function ProductsBoard({ category }: ProductsBoardProps) {
   const [products, setProducts] =
@@ -57,12 +58,12 @@ export default function ProductsBoard({ category }: ProductsBoardProps) {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [category]);
 
-  if (!products) return null;
+  if (!products) return <Spinner className="mt-8" />;
 
   return (
-    <ul className="py-10 grid grid-cols-3 grid-rows-1 gap-8">
+    <ul className="py-10 grid md:grid-cols-3 grid-rows-1 gap-8 w-full md:max-w-[1200px] md:px-8">
       {products.map(({ id, name, price }) => (
         <li
           key={id}

@@ -10,7 +10,6 @@ export default function HomePage() {
         title="Discover the world of programming"
         description="Create something that will change the future - with us it's possible!"
       />
-      <ProductsBoard category={STRIPE_PRODUCT_META_CATEGORY.JAVASCRIPT} />
     </FullHeightContainer>
   );
 }

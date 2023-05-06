@@ -1,8 +1,17 @@
 import { PropsWithChildren } from "react";
+import clsx from "clsx";
 
-export default function FullHeightContainer({ children }: PropsWithChildren) {
+export default function FullHeightContainer({
+  children,
+  className,
+}: PropsWithChildren<{ className?: string }>) {
   return (
-    <div className="flex items-center justify-center flex-col min-h-screen px-4 md:px-0 mx-auto">
+    <div
+      className={clsx(
+        "flex items-center flex-col min-h-screen px-4 md:px-0 mx-auto",
+        className
+      )}
+    >
       {children}
     </div>
   );

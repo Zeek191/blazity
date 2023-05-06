@@ -1,6 +1,7 @@
 import useAuthContext from "@/base/context/auth/hook";
 import { stripe } from "@/base/services/stripe";
 import Link from "@/components/elements/link/link";
+import Spinner from "@/components/elements/spinner/spinner";
 import { useEffect, useState } from "react";
 import type Stripe from "stripe";
 
@@ -20,10 +21,10 @@ export default function ChargesBoard() {
     getCharges();
   }, []);
 
-  if (!charges) return null;
+  if (!charges.length) return <Spinner className="mt-8" />;
 
   return (
-    <ul className="mt-8 w-full px-8 max-w-[800px] max-h-[350px] overflow-y-auto">
+    <ul className="mt-8 w-full md:px-8 max-w-[800px] max-h-[350px] overflow-y-auto">
       {charges.map((charge) => (
         <li
           key={charge.id}
