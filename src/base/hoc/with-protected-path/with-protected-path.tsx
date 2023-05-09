@@ -7,15 +7,17 @@ export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
   Component: React.ComponentType<T>
 ) {
   return function (props: T) {
-    const { user, attempted, clearSignInAttemp } = useAuthContext();
+    const { user, contextLoaded, loadContext } = useAuthContext();
     const router = useRouter();
 
     useEffect(() => {
-      if (!user) {
-        router.push(ROUTES.SIGN_IN);
-        clearSignInAttemp();
-      }
-    }, [user, attempted]);
+      const timeout = setTimeout(() => {
+        if (!user && contextLoaded) return router.push(ROUTES.SIGN_IN);
+        return loadContext();
+      }, 300);
+
+      return () => clearTimeout(timeout);
+    }, [user, contextLoaded]);
 
     return <Component {...props} />;
   };
