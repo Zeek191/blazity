@@ -27,7 +27,11 @@ export default function CoursePage({
 
   return (
     <FullHeightContainer>
-      <Hero title={name} description={"Product ID: " + id}>
+      <Hero
+        title={name}
+        description={"Product ID: " + id}
+        className="mt-10 md:mt-0"
+      >
         {parsedDescription && (
           <ul className="list-disc mt-8 px-4">
             {parsedDescription.map((point, index) => (

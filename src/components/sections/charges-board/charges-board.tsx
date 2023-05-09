@@ -31,11 +31,11 @@ export default function ChargesBoard() {
       {charges.map((charge) => (
         <li
           key={charge.id}
-          className="border-2 border-gray-400 w-full py-4 px-8 rounded-md flex justify-between items-center mb-4"
+          className="border-2 border-gray-400 w-full py-4 md:px-8 rounded-md flex justify-between items-center mb-4 flex-wrap md:flex-nowrap px-4"
         >
           <div>
             {charge.id && (
-              <p className=" text-lg md:text-xl text-gray-400">{charge.id}</p>
+              <p className=" text-md md:text-xl text-gray-400">{charge.id}</p>
             )}
             {charge.amount && (
               <p className="font-bold">
@@ -43,7 +43,14 @@ export default function ChargesBoard() {
               </p>
             )}
           </div>
-          {charge.receipt_url && <Link href={charge.receipt_url}>Receipt</Link>}
+          {charge.receipt_url && (
+            <Link
+              href={charge.receipt_url}
+              className="w-full mt-4 md:mt-0 text-center md:w-auto"
+            >
+              Receipt
+            </Link>
+          )}
         </li>
       ))}
     </ul>
