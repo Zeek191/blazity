@@ -46,7 +46,7 @@ export default function Header() {
     >
       <HeaderMenu className="hidden md:flex justify-end" />
 
-      <div className="w-full flex justify-end pr-8">
+      <div className="w-full flex justify-end pr-8 md:hidden">
         <HamburgerButton
           state={mobileMenu}
           variant={mobileMenu ? "dark" : "light"}

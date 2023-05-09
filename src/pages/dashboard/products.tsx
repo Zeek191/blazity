@@ -3,7 +3,7 @@ import MenuHorizontal from "@/components/elements/menu-horizontal/menu-horizonta
 import FullHeightContainer from "@/components/modules/full-height-container/full-height-container";
 import withProtectedPath from "@/base/hoc/with-protected-path";
 import { DASHBOARD_MENUS } from "@/base/consts/dashboard-menus";
-import { STRIPE_PRODUCT_META_CATEGORY } from "@/components/sections/products-board/types";
+import { STRIPE_PRODUCT_META_CATEGORY } from "@/base/services/stripe/types";
 import ProductsBoard from "@/components/sections/products-board/products-board";
 
 function Products() {

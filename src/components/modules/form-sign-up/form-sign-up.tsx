@@ -44,6 +44,7 @@ export default function FormSignUp() {
           placeholder="Eg. Max"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <Input
           id="surname"
@@ -51,6 +52,7 @@ export default function FormSignUp() {
           placeholder="Eg. Park"
           value={surname}
           onChange={(e) => setSurname(e.target.value)}
+          required
         />
         <Input
           id="email"

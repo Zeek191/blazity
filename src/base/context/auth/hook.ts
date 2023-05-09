@@ -8,7 +8,8 @@ import {
 } from "firebase/auth";
 
 import { firebaseAuth } from "@/base/services/firebase";
-import { clearSigninAttempAction } from "./actions";
+import { loadContextAction, updateUserInfoAction } from "./actions";
+import type { PAYLOAD_UPDATE_USER_INFO } from "./types";
 
 export default function useAuthContext() {
   const { state, dispatch } = useContext(AuthContext);
@@ -37,17 +38,20 @@ export default function useAuthContext() {
     }
   }
 
-  function clearSignInAttemp() {
-    return dispatch(clearSigninAttempAction());
+  function updateUserInfo(userInfo: PAYLOAD_UPDATE_USER_INFO) {
+    return dispatch(updateUserInfoAction(userInfo));
+  }
+
+  function loadContext() {
+    return dispatch(loadContextAction());
   }
 
   return {
-    user: state.user,
-    info: state.info,
-    attempted: state.attempted,
+    ...state,
     signInUser,
     signOutUser,
     signUpUser,
-    clearSignInAttemp,
+    loadContext,
+    updateUserInfo,
   };
 }

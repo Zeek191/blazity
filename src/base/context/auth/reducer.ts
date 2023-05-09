@@ -7,20 +7,27 @@ export default function AuthReducer(state: State, action: ACTIONS) {
         ...state,
         user: action.payload.user,
         info: action.payload.info,
-        attempted: true,
+        contextLoaded: true,
+      };
+    }
+    case ACTION_TYPES.UPDATE_USER_INFO: {
+      return {
+        ...state,
+        info: action.payload,
       };
     }
     case ACTION_TYPES.CLEAR_USER: {
       return {
         ...state,
+        contextLoaded: false,
         user: null,
         info: null,
       };
     }
-    case ACTION_TYPES.CLEAR_ATTEMP: {
+    case ACTION_TYPES.LOAD_CONTEXT: {
       return {
         ...state,
-        attempted: false,
+        contextLoaded: true,
       };
     }
     default: {
