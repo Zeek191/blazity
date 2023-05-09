@@ -23,7 +23,6 @@ export default function ChargesBoard() {
     dependencies: [info?.stripeId],
   });
 
-  console.log(info?.stripeId);
   if (!charges.length && !resultsLoaded) return <Spinner className="mt-8" />;
   if (!info?.stripeId) return null;
 

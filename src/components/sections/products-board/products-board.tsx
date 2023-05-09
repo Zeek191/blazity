@@ -30,7 +30,7 @@ export default function ProductsBoard({ category }: ProductsBoardProps) {
   }
 
   async function saveStripeProductsWithPrices() {
-    const stripeProducts = await fetchProductsWithPrices(category);
+    const stripeProducts = await fetchProductsWithPrices();
     setProducts(stripeProducts);
   }
 
