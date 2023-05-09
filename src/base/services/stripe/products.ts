@@ -1,6 +1,5 @@
 import Stripe from "stripe";
 import { stripe } from "@/base/services/stripe";
-import type { STRIPE_PRODUCT_META_CATEGORY } from "./types";
 
 function combineProductWithPrice(
   products: Stripe.Product[],
@@ -19,12 +18,9 @@ async function resolvePrice(priceID: Stripe.Product["default_price"]) {
   return await stripe.prices.retrieve(String(priceID));
 }
 
-export async function fetchProductsWithPrices(
-  category: STRIPE_PRODUCT_META_CATEGORY
-) {
+export async function fetchProductsWithPrices() {
   const products = await stripe.products.search({
-    query: `active:'true' AND metadata['category']:'${category}'`,
-    limit: 3,
+    query: `active:'true'`,
   });
 
   const pricesPromises = products.data.map((prod) =>

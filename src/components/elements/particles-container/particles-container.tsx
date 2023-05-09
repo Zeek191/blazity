@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import ParticlesModule from "../particles-module/particles";
+import ParticlesModule from "../../modules/particles-module/particles";
 
 export default function ParticlesContainer({ children }: PropsWithChildren) {
   return (
