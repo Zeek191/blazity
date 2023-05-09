@@ -34,7 +34,7 @@ export default function Header() {
     if (mobileMenu) {
       changeMobileMenuState();
     }
-  }, [router.pathname, isTablet]);
+  }, [router.asPath, isTablet]);
 
   return (
     <header
