@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { ComponentType, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ROUTES } from "@/base/consts/routes";
 import useAuthContext from "@/base/context/auth/hook";
 
-export default function withProtectedPath<T extends JSX.IntrinsicAttributes>(
-  Component: React.ComponentType<T>
+export default function withProtectedPath<T extends {}>(
+  Component: ComponentType<T>
 ) {
   return function (props: T) {
     const { user, contextLoaded, loadContext } = useAuthContext();
