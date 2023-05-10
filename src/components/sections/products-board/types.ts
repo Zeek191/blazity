@@ -1,5 +1,5 @@
-import { STRIPE_PRODUCT_META_CATEGORY } from "@/base/services/stripe/types";
+import { StripeProductType } from "@/base/context/products/types";
 
 export type ProductsBoardProps = {
-  category: STRIPE_PRODUCT_META_CATEGORY;
+  products: StripeProductType[];
 };

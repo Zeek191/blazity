@@ -3,17 +3,27 @@ import MenuHorizontal from "@/components/elements/menu-horizontal/menu-horizonta
 import FullHeightContainer from "@/components/elements/full-height-container/full-height-container";
 import withProtectedPath from "@/base/hoc/with-protected-path";
 import { DASHBOARD_MENUS } from "@/base/consts/dashboard-menus";
-import { STRIPE_PRODUCT_META_CATEGORY } from "@/base/services/stripe/types";
 import ProductsBoard from "@/components/sections/products-board/products-board";
+import { fetchProductsWithPrices } from "@/base/services/stripe/products";
+import { ProductsBoardProps } from "@/components/sections/products-board/types";
 
-function Products() {
+function Products({ products }: ProductsBoardProps) {
   return (
     <FullHeightContainer className="justify-start pt-32">
       <UserBar />
       <MenuHorizontal links={DASHBOARD_MENUS} />
-      <ProductsBoard category={STRIPE_PRODUCT_META_CATEGORY.JAVASCRIPT} />
+      <ProductsBoard products={products} />
     </FullHeightContainer>
   );
 }
 
-export default withProtectedPath(Products);
+export async function getStaticProps() {
+  const products = await fetchProductsWithPrices();
+
+  return {
+    props: { products },
+    revalidate: 3600,
+  };
+}
+
+export default withProtectedPath<ProductsBoardProps>(Products);

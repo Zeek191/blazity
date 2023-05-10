@@ -1,11 +1,6 @@
 import { fetchProductsWithPrices } from "@/base/services/stripe/products";
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
-import Stripe from "stripe";
-
-type StripeProductType = Stripe.Product & {
-  slug: string;
-  price?: Stripe.Price;
-};
+import type { StripeProductType } from "./types";
 
 function addSlugToProduct(product: Omit<StripeProductType, "slug">) {
   return {
