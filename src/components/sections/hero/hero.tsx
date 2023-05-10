@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import { HeroProps } from "./types";
+import type { HeroProps } from "./types";
 import ParticlesModule from "@/components/modules/particles-module/particles";
 import clsx from "clsx";
 
