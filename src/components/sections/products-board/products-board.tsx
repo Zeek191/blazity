@@ -1,27 +1,14 @@
-import Stripe from "stripe";
-import { stripe } from "@/base/services/stripe";
-import { useEffect, useState } from "react";
 import type { ProductsBoardProps } from "./types";
 import Button from "@/components/elements/button/button";
 import useAuthContext from "@/base/context/auth/hook";
 import { checkout } from "@/base/services/stripe/checkout";
 import { useRouter } from "next/router";
 import { ROUTES } from "@/base/consts/routes";
-import Spinner from "@/components/elements/spinner/spinner";
 import clsx from "clsx";
-import { fetchProductsWithPrices } from "@/base/services/stripe/products";
-import useAsyncLoader from "@/base/hooks/use-async-loader";
 
-export default function ProductsBoard({ category }: ProductsBoardProps) {
-  const [products, setProducts] =
-    useState<(Stripe.Product & { price?: Stripe.Price })[]>();
-
+export default function ProductsBoard({ products }: ProductsBoardProps) {
   const { user, info } = useAuthContext();
   const router = useRouter();
-  const resultsLoaded = useAsyncLoader({
-    cb: saveStripeProductsWithPrices,
-    dependencies: [category],
-  });
 
   async function onClickHandler(price: string) {
     if (user) return await checkout(price, info?.stripeId);
@@ -29,13 +16,7 @@ export default function ProductsBoard({ category }: ProductsBoardProps) {
     return router.push(ROUTES.SIGN_IN);
   }
 
-  async function saveStripeProductsWithPrices() {
-    const stripeProducts = await fetchProductsWithPrices(category);
-    setProducts(stripeProducts);
-  }
-
-  if (!products?.length && !resultsLoaded) return <Spinner className="mt-8" />;
-
+  if (!products.length) return null;
   return (
     <ul className="py-10 grid md:grid-cols-3 grid-rows-1 gap-8 w-full md:max-w-[1200px] md:px-8">
       {products?.map(({ id, name, price, metadata }) => (

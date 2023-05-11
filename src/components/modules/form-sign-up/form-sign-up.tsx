@@ -58,6 +58,7 @@ export default function FormSignUp() {
           id="email"
           label="E-mail"
           placeholder="Eg. xyz@gmail.com"
+          type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

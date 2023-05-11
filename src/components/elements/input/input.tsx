@@ -40,8 +40,8 @@ export default function Input(props: InputProps) {
         {...rest}
         type={type === "password" ? "password" : "text"}
         className={clsx(
-          "bg-black ring-gray-400 ring-1 text-white px-3 py-2 rounded-lg w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white",
-          props.disabled && "text-gray-500 cursor-not-allowed",
+          "bg-black ring-gray-400 ring-1  px-3 py-2 rounded-lg w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white",
+          props.disabled ? "text-gray-500 cursor-not-allowed" : "text-white",
           className
         )}
       />

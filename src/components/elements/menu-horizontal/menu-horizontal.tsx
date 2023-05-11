@@ -15,8 +15,9 @@ export default function MenuHorizontal({ links }: MenuHorizontalProps) {
             href={link}
             className={clsx(
               "block mb-4 md:mx-4 rounded-full border-2 border-white py-2 px-8 text-center md:text-left duration-300",
-              pathname === link && "bg-white text-black duration-200",
-              pathname !== link && "hover:border-gray-500 hover:text-gray-500"
+              pathname === link
+                ? "bg-white text-black duration-200"
+                : "hover:border-gray-500 hover:text-gray-500"
             )}
           >
             {label}

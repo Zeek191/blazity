@@ -1,12 +1,4 @@
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  getDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { getDoc, doc, setDoc } from "firebase/firestore";
 import { firebaseDatabase } from "../services/firebase";
 import { UserInfo } from "../types/users";
 import { FIRESTORE_COLLECTIONS } from "../consts/database-endpoints";
